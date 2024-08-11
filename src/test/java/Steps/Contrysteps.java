@@ -6,13 +6,7 @@ import io.cucumber.java.en.When;
 import org.example.com.LMS.base.Base;
 import org.example.com.LMS.pages.CountryPage;
 import org.example.com.LMS.pages.LoginPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-
-import java.util.concurrent.TimeUnit;
-
-import static org.example.com.LMS.base.Base.lanuchBrowser;
 
 public class Contrysteps extends Base {
 
@@ -35,27 +29,20 @@ public class Contrysteps extends Base {
 
     @Then("User-save-the-new-changes")
     public void User_Save_the_new_changes() {
-        driver.manage().timeouts().implicitlyWait(7000, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
-        driver.findElement(By.cssSelector(".flex.flex-col.gap-2 > div:nth-of-type(1) > button[role='checkbox']")).click();
-        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("/html[1]/body[1]/div[3]/div[2]/form[1]/div[2]/div[1]/div[1]/div[1]/button[1]")).click();
+        countryPage = new CountryPage();
+        countryPage.AddOnOfTheCountry();
     }
 
     @Then("User-remove-items-from-the-list")
     public void userRemoveItemsFromTheList() {
-        for (int i = 0; i < 5 ; i++){
-            driver.findElement(By.xpath("/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[1]/div[1]/div[1]/button[1]")).click();
-        }
-        driver.findElement(By.xpath("/html[1]/body[1]/div[3]/div[3]/div[1]/button[1]")).click();
+        countryPage = new CountryPage();
+        countryPage.removeCountry();
     }
 
     @Then("Add three items to the list")
     public void addThreeItemsToTheList() {
-        for (int i = 0; i < 3; i++){
-            driver.findElement(By.xpath("//body/div[@id='radix-:rk:']/div[2]/form[1]/div[2]/div[1]/div[1]/div[1]/button[1]")).click();
-        }
-        driver.findElement(By.xpath("/html[1]/body[1]/div[3]/div[3]/div[1]/button[1]")).click();
+        countryPage = new CountryPage();
+        countryPage.AddmultiCountry();
     }
 
 
