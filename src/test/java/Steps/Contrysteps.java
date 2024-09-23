@@ -1,5 +1,6 @@
 package Steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -46,5 +47,15 @@ public class Contrysteps extends Base {
     }
 
 
+    @Then("Search By Country Name")
+    public void searchByCountryName() {
+        countryPage = new CountryPage();
+        countryPage.SearchByCountry();
+    }
 
+    @And("Add that items to the list")
+    public void addThatItemsToTheList() {
+        countryPage = new CountryPage();
+        countryPage.AddOnOfTheCountry();
+    }
 }

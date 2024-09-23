@@ -18,11 +18,15 @@ Feature: Academic year
     Then user click on update
     Then update the data and click save
 
-  Scenario: remove record from the list
+  Scenario: Do Bulk options
     Given Open website and login
     When Click on setting and AcademicYear
-    Then Fill the data
-    Then Click on the delete button
+    Then Click on the top check box
+
+
+
+
+
 
 
 

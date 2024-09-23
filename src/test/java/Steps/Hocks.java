@@ -10,8 +10,12 @@ public class Hocks extends Base {
 
     }
 
+
     @After
     public void runAfterAnyScenario(){
         driver.quit();
     }
+
+
+
 }

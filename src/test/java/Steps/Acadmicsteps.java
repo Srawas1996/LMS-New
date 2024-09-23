@@ -1,29 +1,17 @@
 package Steps;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.example.com.LMS.base.Base;
 import org.example.com.LMS.pages.AcademicYearPage;
 import org.example.com.LMS.pages.LoginPage;
-import org.openqa.selenium.By;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-
-import java.util.concurrent.TimeUnit;
 
 
 public class Acadmicsteps extends Base {
 
-    WebDriver driver;
-    WebElement date;
     LoginPage loginPage;
     AcademicYearPage academicYearPage;
 
@@ -74,5 +62,11 @@ public class Acadmicsteps extends Base {
         academicYearPage.updateTheData();
     }
 
+
+    @Then("Click on the top check box")
+    public void clickOnTheTopCheckBox() {
+        academicYearPage = new AcademicYearPage();
+        academicYearPage.ClickOnTopCheckBox();
+    }
 
 }

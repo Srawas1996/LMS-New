@@ -1,7 +1,7 @@
 
 Feature: Login Page
 
-  @Sanity
+
   Scenario Outline: Invalid login
     Given user open website and login to the system
     When User fill email as "<email>" and "<password>" and click login

@@ -32,6 +32,9 @@ public class CountryPage extends Base {
     @FindBy(xpath = "/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[1]/div[1]/div[1]/button[1]")
     WebElement RemoveCountry;
 
+    @FindBy(xpath = "//*[@placeholder='Search countries']")
+    WebElement SearchBar;
+
 
     public void goToSettings(){
         driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
@@ -62,6 +65,10 @@ public class CountryPage extends Base {
 
         driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
         SaveTheCountries.click();
+    }
+
+    public void SearchByCountry(){
+        SearchBar.sendKeys("France");
     }
 
 

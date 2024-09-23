@@ -1,12 +1,9 @@
 package org.example.com.LMS.pages;
 
 import org.example.com.LMS.base.Base;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.concurrent.TimeUnit;
 
 public class LoginPage extends Base {
 
@@ -21,13 +18,13 @@ public class LoginPage extends Base {
     @FindBy(name = "password")
     WebElement password;
 
-    @FindBy(xpath = "//button[contains(text(),'Sign in')]")
+    @FindBy(xpath = "//button[contains(text(),'Sign In')]")
     WebElement SingInButton;
 
     @FindBy(xpath = "//body/div[@id='__next']/div[1]/section[1]/ol[1]/li[1]")
     WebElement errorMessageDisplayed;
 
-    @FindBy(xpath = "/html[1]/body[1]/div[1]/div[1]/header[1]/div[2]/button[2]/span[1]/span[1]")
+    @FindBy(xpath = "/html[1]/body[1]/div[1]/div[1]/header[1]/div[1]/div[2]/button[2]/span[1]")
     WebElement ClickOnProflie;
 
     @FindBy(xpath = "//div[contains(text(),'Log Out')]")
@@ -41,11 +38,10 @@ public class LoginPage extends Base {
         this.SingInButton.click();
     }
 
-    public HomePage PerformValidLogin(){
+    public void PerformValidLogin(){
         this.email.sendKeys(properties.get("username").toString());
         this.password.sendKeys(properties.get("password").toString());
         this.SingInButton.click();
-        return new HomePage();
 
     }
 

@@ -14,3 +14,9 @@ Feature: Countries
     Given User-navigate-to-country-tab
     When User-Click-on-the-country
     Then Add three items to the list
+
+  Scenario: Add by search country to the list
+    Given User-navigate-to-country-tab
+    When User-Click-on-the-country
+    Then Search By Country Name
+    And Add that items to the list

@@ -1,10 +1,12 @@
 package org.example.com.LMS.pages;
 
 import org.example.com.LMS.base.Base;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class AcademicYearPage extends Base {
@@ -27,27 +29,33 @@ public class AcademicYearPage extends Base {
     @FindBy(xpath = "//div[3]/button")
     WebElement startDate;
 
-    @FindBy(xpath = "//div[4]/button")
+    @FindBy(xpath = "/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[4]/button[1]")
     WebElement endDate;
 
-    @FindBy(xpath = "//div[3]/div/div/div/div/div/div/div")
+    @FindBy(xpath = "/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]")
     WebElement getStartDateMonth;
 
-    @FindBy(xpath = "//div[4]/div/div/div/div/div/div/div")
+    @FindBy(xpath = "/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[2]/span[1]")
+    WebElement getStartDateYear;
+
+    @FindBy(xpath = "/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]")
     WebElement getEndDateMonth;
 
-    @FindBy(css = ".end-1 > .lucide")
+    @FindBy(xpath = "/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[2]/span[1]")
+    WebElement getEndDateYear;
+
+    @FindBy(xpath = "/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/button[1]")
     WebElement goToNextMonthStart;
 
-    @FindBy(xpath = "/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/button[2]")
+    @FindBy(xpath = "/html[1]/body[1]/div[3]/div[2]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/button[1]")
     WebElement goToNextMonthEnd;
 
 
     @FindBy(xpath = "(//button[@name='day'])[8]")
     WebElement pickStartDateDay;
 
-    @FindBy(css = ".flex:nth-child(2) > .h-9:nth-child(5) > .rdp-button_reset")
-    WebElement pickEndDateDy;
+    @FindBy(css = ".flex:nth-child(1) > .h-9:nth-child(4) > .rdp-button_reset")
+    WebElement pickEndDateDay;
 
     @FindBy(xpath = "//div[3]/div/button")
     WebElement clickOnCreate;
@@ -70,6 +78,18 @@ public class AcademicYearPage extends Base {
     @FindBy(css = ".gap-2 > .bg-primary")
     WebElement clickOnUpdate;
 
+    @FindBy(css = ".py-2 > .peer")
+    WebElement TopCheckBok;
+
+    @FindBy(xpath = "//div[contains(text(),'10')]")
+    WebElement NumberOfCheckItem;
+
+    @FindBy(css = "tbody")
+    WebElement list;
+
+    @FindBy(xpath = "//body/div[@id='__next']/div[1]/main[1]/div[2]/div[1]/div[1]/button[1]")
+    WebElement DeleteOptionIsDisplayed;
+
     public AcademicYearPage(){
         PageFactory.initElements(driver,this);
     }
@@ -84,49 +104,62 @@ public class AcademicYearPage extends Base {
 
     public void pickTheStartDate(){
         startDate.click();
-        String stratDateMonth = getStartDateMonth.getText();
-        for (int i = 0 ; i < 12 ; i++){
-            if (stratDateMonth.contains("September")){
-                //Select the date
-                pickStartDateDay.click();
-            }
-            else {
-                //go to the next month
-                goToNextMonthStart.click();
-                stratDateMonth = getStartDateMonth.getText();
 
-            }
+        String startDateYear = getStartDateYear.getText();
+
+        while (!startDateYear.contains("2021")){
+            goToNextMonthStart.click();
+            startDateYear = getStartDateYear.getText();
         }
 
+        String startDateMonth = getStartDateMonth.getText();
+        while (!startDateMonth.contains("September")){
+            goToNextMonthStart.click();
+            startDateMonth = getStartDateMonth.getText();
+        }
 
+        pickStartDateDay.click();
     }
+
+
 
     public void pickTheEndDate(){
         endDate.click();
-        String EndDateMonth = getEndDateMonth.getText();
-        for (int i = 0 ; i < 12 ; i++){
-            if (EndDateMonth.contains("June")){
+
+        String EndDateYear = getEndDateYear.getText();
+
+        for (int i = 0 ; i < 60 ; i++){
+            if (EndDateYear.contains("2022")){
                 //Select the date
-                driver.manage().timeouts().implicitlyWait(10000, TimeUnit.SECONDS);
-                pickEndDateDy.click();
                 break;
             }
             else {
                 //go to the next month
                 goToNextMonthEnd.click();
-                EndDateMonth = getEndDateMonth.getText();
+                EndDateYear = getEndDateYear.getText();
             }
+        }
 
+        String EndDateMonth = getEndDateMonth.getText();
+        for (int i = 0; i < 12; i++) {
+            if (EndDateMonth.contains("June")) {
+                pickEndDateDay.click();
+                break; // Exit the loop once the current month is reached
+            } else {
+                goToNextMonthEnd.click();
+                EndDateMonth = getEndDateMonth.getText();
+
+            }
         }
     }
 
     public void fillTheData(){
         clickOnPlusSign.click();
-        setEnglishName.sendKeys("2025/2026-en");
-        setArabicName.sendKeys("2025/2026-ar");
+        setEnglishName.sendKeys("2021/2022-en");
+        setArabicName.sendKeys("2021/2022-ar");
         pickTheStartDate();
         pickTheEndDate();
-        clickOnCreate.click();
+        //clickOnCreate.click();
     }
 
     public void deleteOnRecord(){
@@ -148,6 +181,22 @@ public class AcademicYearPage extends Base {
     public void updateTheData(){
         setEnglishName.sendKeys("2025/2026-en_new");
         clickOnUpdate.click();
+
+    }
+
+    public void ClickOnTopCheckBox(){
+        if (!TopCheckBok.isSelected()) {
+            TopCheckBok.click();
+        }
+
+        assert NumberOfCheckItem.getText().equals(getNumberOfItemsInList()) : "Passed";
+        assert DeleteOptionIsDisplayed.isDisplayed() : "Passed";
+    }
+
+    public String getNumberOfItemsInList(){
+        List<WebElement> webElements = list.findElements(By.tagName("tr"));
+
+        return webElements.size()+"";
 
     }
 
